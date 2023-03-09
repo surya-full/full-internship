@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spotify Search</title>
+    
+</head>
+<body>
+    <h1>Spotify Search</h1>
+    <input type="text" id="search" name="search">
+    <button type="button" onclick="searchSpotify()">Search</button>
+    <script>
+        function searchSpotify() {
+            try {
+            var searchQuery = document.getElementById("search").value;
+            var xhr = new XMLHttpRequest();
+            var url = "https://spotify81.p.rapidapi.com/search";
+            xhr.open("GET", url, true);
+            xhr.setRequestHeader("X-RapidAPI-Key","X-RapidAPI-Host");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var data = JSON.parse(xhr.response);
+                        console.log(data)
+                    } else {
+                        console.log("Error:", xhr.status);
+                    }
+                }
+            };
+            xhr.send(`query=${query}`);
+            } catch (error) {
+            console.log("Error:", error.message);
+            }
+        }
+    </script>
+</body>
+</html>
+
+
